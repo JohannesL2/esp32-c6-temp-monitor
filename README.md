@@ -7,6 +7,7 @@ A clean, non-blocking real-time CPU temperature and RAM monitor tailored specifi
 - **Display:** 1.47" IPS LCD (172×320, ST7789V2 driver via SPI)
 
 ---
+<img height="400" alt="esp32-c6-temp-monitor" src="https://github.com/user-attachments/assets/970481f0-be2e-4484-8282-30d91b7feef1" />
 
 ## How to Install and Run
 
