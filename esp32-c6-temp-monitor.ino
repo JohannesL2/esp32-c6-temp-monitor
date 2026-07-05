@@ -16,6 +16,10 @@ static lv_obj_t *tempTitle;
 static lv_obj_t *tempLbl;
 static lv_obj_t *lblFooter;
 
+// UI-chart
+static lv_obj_t *chart;
+static lv_chart_series_t *ser1;
+
 // Update UI with the new value
 void updateUI()
 {
@@ -42,6 +46,9 @@ void updateUI()
         // If the chip is cool (under 35°C) -> blue/grey color
         lv_obj_set_style_bg_color(tempBox, lv_color_mix(lv_palette_main(LV_PALETTE_BLUE), lv_color_black(), 180), 0);
     }
+
+    // Update value for lvgl chart
+    lv_chart_set_next_value(chart, ser1, (int)currentTemp);
 }
 
 // Build UI using only font 16
@@ -79,6 +86,18 @@ static void buildUI()
     lv_obj_align(lblFooter, LV_ALIGN_BOTTOM_MID, 0, -6);
     lv_label_set_text(lblFooter, "RAM -- KB");
     lv_obj_set_style_text_color(lblFooter, lv_palette_main(LV_PALETTE_GREY), 0);
+
+    // LVGL Charts
+    chart = lv_chart_create(lv_scr_act());
+    lv_obj_set_size(chart, LV_PCT(90), 60);
+    lv_obj_align(chart, LV_ALIGN_BOTTOM_MID, 0, -30);
+    lv_chart_set_type(chart, LV_CHART_TYPE_LINE);
+
+    ser1 = lv_chart_add_series(chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
+
+    lv_chart_set_range(chart, LV_CHART_AXIS_PRIMARY_Y, 20, 60);
+
+    lv_chart_set_all_value(chart, ser1, 0);
 }
 
 // LVGL-function for screen and time sync
